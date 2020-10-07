@@ -37,15 +37,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/public/*").permitAll()
-                .antMatchers("/signup", "/login").permitAll()
+                .antMatchers("/public/*").permitAll() //allows css file to be read
+                .antMatchers("/signup", "/login", "/addUser").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")             //login page
-                .defaultSuccessUrl("/verified") //if login is successful redirect
+                .defaultSuccessUrl("/myprofile") //if login is successful redirect
                 .and()
-                .logout();
+                .logout()
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");
     }
 }
 
