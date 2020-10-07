@@ -1,15 +1,26 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="resources/static/styles.css">
 </head>
 <body>
-<img src="">
+<h1 th:if="${user}" th:text="${user.userName}"></h1>
+<h1 th:unless="${user}" >Unable to Locate that user</h1>
+
+<section>
+    <img src="">
+    <h2 th:text="${user.userName}"></h2><br>
+    <p th:text="${user.firstname}"></p><br>
+    <p th:text="${user.lastname}"></p><br>
+    <p th:text="${user.dob}"></p><br>
+    <p th:text="${user.bio}"></p><br>
+</section>
+
 
 </body>
 </html>

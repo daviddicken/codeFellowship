@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +7,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="resources/static/styles.css">
 </head>
 <body>
     <h1>Codefellowship</h1>
@@ -14,8 +14,12 @@
 
     <form action="/signup" method="POST">
         Sign Up:
-        <br>User Name:<input type="text" name="userName">
+        <br>User Name:<input type="text" name="username">
         <br>Password:<input type="password" name="password">
+        <br>First Name:<input type="text" name="firstname">
+        <br>Last Name:<input type="text" name="lastname">
+        <br>Birthday:<input type="date" name="dob">
+        <br>Bio:<input type="text" name="bio">
         <button type="submit">Sign Up</button>
     </form>
 </body>

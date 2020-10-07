@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Date;
 import java.util.Collection;
 
 @Entity
@@ -15,14 +16,23 @@ public class Users implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
-    String userName;
-    String password;
+    public String userName;
+    public String password;
+    public String firstname;
+    public String lastname;
+    public String bio;
+    public java.sql.Date dob;
+
 
     public  Users() {};
 
-    public Users(String userName, String password) {
+    public Users(String userName, String password, String firstname, String lastname, String bio, Date dob) {
         this.userName = userName;
         this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.bio = bio;
+        this.dob = dob;
     }
 
     @Override
@@ -58,5 +68,57 @@ public class Users implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 }
