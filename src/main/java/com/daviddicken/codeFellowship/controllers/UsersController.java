@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.sql.Date;
 
@@ -26,15 +28,30 @@ public class UsersController {
     @PostMapping("/signup")
     public RedirectView addNewUser(String username, String password,
                                    String firstname, String lastname,
-                                   String bio, Date dob){
+                                   String bio, Date dob, HttpServletRequest request) throws Exception {
 
-        password = passwordEncoder.encode(password);
+       String passwordEncode = passwordEncoder.encode(password);
 
-        Users newUser = new Users(username, password, firstname, lastname, bio, dob);
+        Users newUser = new Users(username, passwordEncode, firstname, lastname, bio, dob);
         usersRepository.save(newUser);
 
-        return new RedirectView("/userInfo/" + username );
+        validate(request, username, password); //auto login
+        return new RedirectView("/myprofile");
     }
+
+    //https://www.baeldung.com/spring-security-auto-login-user-after-registration
+    public void validate(HttpServletRequest request,String username, String password) throws Exception {
+        try{
+            request.login(username, password);
+        }catch (ServletException e){
+            System.out.println(e.getMessage());
+            throw new Exception("Trouble logging in");
+        }
+    }
+
+
+    @GetMapping("/addUser")
+    public String addUser(){return "addUser";}
 
     @GetMapping("/login")
     public String login(){
@@ -42,8 +59,8 @@ public class UsersController {
     }
 
     // Huge help from Jack in a lot of places in this app but refactoring this function was one of them
-    @GetMapping("/verified")
-    public RedirectView RedirectView(Principal principal){
+    @GetMapping("/myprofile")
+    public RedirectView redirectProfile(Principal principal){
         return new RedirectView("/userInfo/" + principal.getName() );
     }
 
@@ -54,4 +71,5 @@ public class UsersController {
 
         return "userpage";
     }
+
 }

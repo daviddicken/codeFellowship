@@ -1,6 +1,7 @@
 <!doctype html>
 
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,18 +11,18 @@
     <link rel="stylesheet" href="/public/styles.css">
 </head>
 <body>
-    <h1>Codefellowship</h1>
-    <h2>"A place for coders to share in the struggle"</h2>
+    <div th:replace="fragments/frags :: nav"></div>
 
-    <form action="/signup" method="POST">
-        Sign Up:
-        <br>User Name:<input type="text" name="username">
-        <br>Password:<input type="password" name="password">
-        <br>First Name:<input type="text" name="firstname">
-        <br>Last Name:<input type="text" name="lastname">
-        <br>Birthday:<input type="date" name="dob">
-        <br>Bio:<input type="text" name="bio">
+    <h1>Codefellowship</h1>
+    <h2>"The struggle is real"</h2>
+
+    <form action="/addUser" method="get">
         <button type="submit">Sign Up</button>
     </form>
+    <form action="/login" method="get">
+        <button type="submit">Login</button>
+    </form>
+
+
 </body>
 </html>

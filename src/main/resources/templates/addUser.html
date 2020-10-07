@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="fragments/frags :: nav"></div>
+<h1>Please set up your account</h1>
+<form action="/signup" method="POST">
+    Sign Up:
+    <br>User Name:<input type="text" name="username">
+    <br>Password:<input type="password" name="password">
+    <br>First Name:<input type="text" name="firstname">
+    <br>Last Name:<input type="text" name="lastname">
+    <br>Birthday:<input type="date" name="dob">
+    <br>Bio:<input type="text" name="bio">
+    <button type="submit">Sign Up</button>
+</form>
+
+</body>
+</html>
