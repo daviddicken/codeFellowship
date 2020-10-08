@@ -13,28 +13,26 @@
 <body>
 <div th:replace="fragments/frags :: nav"></div>
 
-<h1 th:if="${user}" th:text="${user.userName}"></h1>
-<h1 th:unless="${user}" >Unable to Locate that user</h1>
+<h1 th:text="${user.userName}"></h1>
+
 
 <section>
     <img src="/public/img/coder.jpg"><br>
-   First Name: <p th:text="${user.firstname}"></p><br>
-   Last Name: <p th:text="${user.lastname}"></p><br>
-   Birthday: <p th:text="${user.dob}"></p><br>
-   Bio: <p th:text="${user.bio}"></p><br>
-
-    <form action="/follow" method="post">
-        <input type="hidden" name="followed" th:value="${user.username}">
-        <button type="submit">Follow</button>
-    </form>
+    First Name: <p th:text="${user.firstname}"></p><br>
+    Last Name: <p th:text="${user.lastname}"></p><br>
+    Birthday: <p th:text="${user.dob}"></p><br>
+    Bio: <p th:text="${user.bio}"></p><br>
 
 </section>
 
+<form action="/savepost" method="post">
+    <input type="hidden" name="id" th:value="${user.id}">
+    Post: <input type="text" name="body">
+    <button type="submit" >Submit</button>
+</form>
 
 <section th:if="${user}">
     <p th:each="post : ${user.posts}" th:text="${post}"></p>
 </section>
-
-
 </body>
 </html>

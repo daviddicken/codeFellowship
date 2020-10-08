@@ -3,6 +3,8 @@ Is an app that allows people learning to code to connect with each other.
 It allows for a user to create a user name and give details about themself.
 It also allows the user to create a post (add a note) and all of their notes will 
 show up on their user page. 
+There is a all users page that will display all users. You can view other user info
+and choose to follow them if you like.
 
 ### Running this program
 After cloning the repo you will need to create a postgresql database name codefellowship
