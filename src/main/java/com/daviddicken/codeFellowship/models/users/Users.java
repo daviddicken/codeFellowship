@@ -5,9 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+
 
 @Entity
 public class Users implements UserDetails {
@@ -25,6 +24,19 @@ public class Users implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     public List<Post> posts = new ArrayList<>();
 
+    //================== Many to Many ==================
+    @ManyToMany(cascade = CascadeType.REMOVE)
+
+    @JoinTable(
+            name="friends",
+            joinColumns = { @JoinColumn(name="user1")},
+            inverseJoinColumns = {@JoinColumn(name="user2")}
+    )
+
+    public Set<Users> stalkers = new HashSet<>();
+
+    @ManyToMany(mappedBy = "stalkers")
+    public Set<Users> followed = new HashSet<>();
 
     //================= Constructors =============
     public  Users() {};
