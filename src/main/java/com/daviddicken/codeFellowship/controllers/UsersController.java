@@ -35,20 +35,9 @@ public class UsersController {
         Users newUser = new Users(username, passwordEncode, firstname, lastname, bio, dob);
         usersRepository.save(newUser);
 
-        validate(request, username, password); //auto login
-        return new RedirectView("/myprofile");
+        request.login(username, password); // auto login
+        return new RedirectView("/userInfo/" + username);
     }
-
-    //https://www.baeldung.com/spring-security-auto-login-user-after-registration
-    public void validate(HttpServletRequest request,String username, String password) throws Exception {
-        try{
-            request.login(username, password);
-        }catch (ServletException e){
-            System.out.println(e.getMessage());
-            throw new Exception("Trouble logging in");
-        }
-    }
-
 
     @GetMapping("/addUser")
     public String addUser(){return "addUser";}
@@ -67,9 +56,12 @@ public class UsersController {
     @GetMapping("/userInfo/{username}")
     public String userInfo(@PathVariable String username, Model m){
         Users user = usersRepository.findByUserName(username);
+        user.getId();
         m.addAttribute("user", user);
 
         return "userpage";
     }
+
+
 
 }
