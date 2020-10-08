@@ -3,12 +3,11 @@ package com.daviddicken.codeFellowship.models.users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Users implements UserDetails {
@@ -23,7 +22,11 @@ public class Users implements UserDetails {
     public String bio;
     public java.sql.Date dob;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    public List<Post> posts = new ArrayList<>();
 
+
+    //================= Constructors =============
     public  Users() {};
 
     public Users(String userName, String password, String firstname, String lastname, String bio, Date dob) {

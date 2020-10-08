@@ -6,21 +6,32 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="/public/styles.css">
+
+    <title th:text="${user.userName}">User Page</title>
 </head>
 <body>
+<div th:replace="fragments/frags :: nav"></div>
+
 <h1 th:if="${user}" th:text="${user.userName}"></h1>
 <h1 th:unless="${user}" >Unable to Locate that user</h1>
 
 <section>
-    <img src="/public/img/coder.jpg">
-    <h2 th:text="${user.userName}"></h2><br>
-    <p th:text="${user.firstname}"></p><br>
-    <p th:text="${user.lastname}"></p><br>
-    <p th:text="${user.dob}"></p><br>
-    <p th:text="${user.bio}"></p><br>
+    <img src="/public/img/coder.jpg"><br>
+   First Name: <p th:text="${user.firstname}"></p><br>
+   Last Name: <p th:text="${user.lastname}"></p><br>
+   Birthday: <p th:text="${user.dob}"></p><br>
+   Bio: <p th:text="${user.bio}"></p><br>
 </section>
 
+<form action="/savepost" method="post">
+    <input type="hidden" name="id" th:value="${user.id}">
+   Post: <input type="text" name="body">
+    <button type="submit" >Submit</button>
+</form>
 
+<section th:if="${user}">
+    <p th:each="post : ${user.posts}" th:text="${post}"></p>
+</section>
 </body>
 </html>

@@ -16,13 +16,18 @@ public class Post {
     String body;
 
     //============== Constructors ====================
-    public Post(){}
+    public Post(){};
 
-    public Post(long id, Users user, Date createdAt, String body) {
-        this.id = id;
-        this.user = user;
-        this.createdAt = createdAt;
+    public Post(String body) {
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        this.createdAt = date;
         this.body = body;
+    }
+    //========== toString =============================
+    public String toString(){
+//        String timeStamp = createdAt.toString();
+        return body + "    Posted on: " + createdAt;
     }
 
     //========== Getters & Setters =====================
