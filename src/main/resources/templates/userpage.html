@@ -11,30 +11,26 @@
     <title th:text="${user.userName}">User Page</title>
 </head>
 <body>
-<div th:replace="fragments/frags :: nav"></div>
+    <div th:replace="fragments/frags :: nav"></div>
 
-<h1 th:if="${user}" th:text="${user.userName}"></h1>
-<h1 th:unless="${user}" >Unable to Locate that user</h1>
+    <h1 th:if="${user}" th:text="${user.userName}"></h1>
+    <h1 th:unless="${user}" >Unable to Locate that user</h1>
 
-<section>
-    <img src="/public/img/coder.jpg"><br>
-   First Name: <p th:text="${user.firstname}"></p><br>
-   Last Name: <p th:text="${user.lastname}"></p><br>
-   Birthday: <p th:text="${user.dob}"></p><br>
-   Bio: <p th:text="${user.bio}"></p><br>
+    <section>
+        <img src="/public/img/coder.jpg"><br>
+       First Name: <p th:text="${user.firstname}"></p><br>
+       Last Name: <p th:text="${user.lastname}"></p><br>
+       Birthday: <p th:text="${user.dob}"></p><br>
+       Bio: <p th:text="${user.bio}"></p><br>
 
-    <form action="/follow" method="post">
-        <input type="hidden" name="followed" th:value="${user.username}">
-        <button type="submit">Follow</button>
-    </form>
+        <form action="/follow" method="post">
+            <input type="hidden" name="followed" th:value="${user.username}">
+            <button type="submit">Follow</button>
+        </form>
+    </section>
 
-</section>
-
-
-<section th:if="${user}">
-    <p th:each="post : ${user.posts}" th:text="${post}"></p>
-</section>
-
-
+    <section th:if="${user}">
+        <p th:each="post : ${user.posts}" th:text="${post}"></p>
+    </section>
 </body>
 </html>
