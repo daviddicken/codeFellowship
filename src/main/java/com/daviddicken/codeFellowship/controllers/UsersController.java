@@ -50,7 +50,7 @@ public class UsersController {
         return "allUsers";
     }
 
-    //========================================================
+    //=================Add User ===============================
     @GetMapping("/addUser")
     public String addUser(){return "addUser";}
 
@@ -60,7 +60,6 @@ public class UsersController {
     }
 
     //============== My Profile ===============================
-    // Huge help from Jack in a lot of places in this app but refactoring this function was one of them
     @GetMapping("/myprofile")
     public String profilePage(Principal principal, Model m){
         Users user = usersRepository.findByUserName(principal.getName());
@@ -88,15 +87,9 @@ public class UsersController {
         System.out.println("potatoStalkers " + potatoStalkers);
         System.out.println("potato " + potato);
 
-
         potatoStalkers.followed.add(potato);
         potato.stalkers.add(potatoStalkers);
 
-
         return new RedirectView("/allUsers");
     }
-
-
-
-
 }
